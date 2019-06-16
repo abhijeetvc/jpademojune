@@ -1,7 +1,9 @@
 package com.jpajune.jpademojune.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -13,6 +15,19 @@ public class Employee {
     private String empName;
     private String empCity;
     private Integer age;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="dept_id")
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public Integer getId() {
         return id;
